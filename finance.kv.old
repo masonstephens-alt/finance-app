@@ -1,0 +1,356 @@
+#:import dp kivy.metrics.dp
+
+
+<AccountsScreen>:
+    name: "accounts"
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: dp(16)
+        spacing: dp(12)
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(55)
+
+            Label:
+                text: "Accounts"
+                font_size: dp(28)
+                bold: True
+                halign: "left"
+                valign: "middle"
+                color: 0.1, 0.1, 0.1, 1
+
+            Button:
+                text: "+"
+                font_size: dp(30)
+                size_hint_x: None
+                width: dp(55)
+                on_release: root.open_add_account()
+
+        ScrollView:
+            do_scroll_x: False
+
+            GridLayout:
+                id: accounts_container
+                cols: 1
+                spacing: dp(10)
+                size_hint_y: None
+                height: self.minimum_height
+
+    Popup:
+        id: add_account_popup
+        title: "Add Account"
+        size_hint: 0.9, None
+        height: dp(390)
+        auto_dismiss: False
+
+        BoxLayout:
+            orientation: "vertical"
+            padding: dp(20)
+            spacing: dp(12)
+
+            Label:
+                text: "Account name"
+                size_hint_y: None
+                height: dp(30)
+                halign: "left"
+
+            TextInput:
+                id: account_name
+                hint_text: "e.g. Checking"
+                multiline: False
+                size_hint_y: None
+                height: dp(45)
+
+            Label:
+                text: "Account type"
+                size_hint_y: None
+                height: dp(30)
+                halign: "left"
+
+            Spinner:
+                id: account_type
+                text: "checking"
+                values: ["checking", "savings", "credit_card"]
+                size_hint_y: None
+                height: dp(45)
+
+            Label:
+                text: "Starting balance"
+                size_hint_y: None
+                height: dp(30)
+                halign: "left"
+
+            TextInput:
+                id: account_balance
+                hint_text: "0.00"
+                input_filter: "float"
+                multiline: False
+                size_hint_y: None
+                height: dp(45)
+
+            Widget:
+
+            BoxLayout:
+                size_hint_y: None
+                height: dp(50)
+                spacing: dp(10)
+
+                Button:
+                    text: "Cancel"
+                    on_release: add_account_popup.dismiss()
+
+                Button:
+                    text: "Add Account"
+                    on_release: root.add_account()
+
+
+<AccountsScreen>:
+
+    BoxLayout:
+
+        orientation: "vertical"
+
+        padding: dp(12)
+        spacing: dp(8)
+
+
+        canvas.before:
+
+            Color:
+                rgba: 0.055, 0.065, 0.09, 1
+
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+
+        # Header
+
+        BoxLayout:
+
+            size_hint_y: None
+            height: dp(55)
+
+
+            Label:
+
+                text: "Accounts"
+
+                font_size: "24sp"
+
+                bold: True
+
+                halign: "left"
+                valign: "middle"
+
+
+            Button:
+
+                text: "+ Add Account"
+
+                size_hint_x: None
+
+                width: dp(160)
+
+                background_color: 0.15, 0.55, 0.95, 1
+
+                on_release:
+                    root.open_add_account()
+
+
+        # Account list
+
+        ScrollView:
+
+            do_scroll_x: False
+
+
+            GridLayout:
+
+                id: accounts_container
+
+                cols: 1
+
+                spacing: dp(4)
+
+                padding: dp(4)
+
+                size_hint_y: None
+
+                height: self.minimum_height
+
+
+        # Add account popup
+
+        Popup:
+
+            id: add_account_popup
+
+            title: "Add Account"
+
+            size_hint: 0.9, 0.65
+
+            auto_dismiss: False
+
+
+            BoxLayout:
+
+                orientation: "vertical"
+
+                padding: dp(15)
+
+                spacing: dp(12)
+
+
+                Label:
+
+                    text: "Account Name"
+
+                    size_hint_y: None
+                    height: dp(25)
+
+
+                TextInput:
+
+                    id: account_name
+
+                    hint_text: "e.g. Main Checking"
+
+                    multiline: False
+
+                    size_hint_y: None
+                    height: dp(50)
+
+
+                Label:
+
+                    text: "Account Type"
+
+                    size_hint_y: None
+                    height: dp(25)
+
+
+                Spinner:
+
+                    id: account_type
+
+                    text: "Checking"
+
+                    values:
+                        "Checking",
+                        "Savings",
+                        "Credit Card"
+
+                    size_hint_y: None
+                    height: dp(50)
+
+
+                Label:
+
+                    text: "Current Balance"
+
+                    size_hint_y: None
+                    height: dp(25)
+
+
+                TextInput:
+
+                    id: account_balance
+
+                    hint_text: "0.00"
+
+                    multiline: False
+
+                    input_filter: "float"
+
+                    size_hint_y: None
+                    height: dp(50)
+
+
+                Widget:
+
+
+                BoxLayout:
+
+                    size_hint_y: None
+
+                    height: dp(55)
+
+                    spacing: dp(10)
+
+
+                    Button:
+
+                        text: "Cancel"
+
+                        on_release:
+                            root.ids.add_account_popup.dismiss()
+
+
+                    Button:
+
+                        text: "Save"
+
+                        background_color: 0.15, 0.65, 0.35, 1
+
+                        on_release:
+                            root.save_account()
+
+
+<GoalsScreen>:
+
+    BoxLayout:
+
+        orientation: "vertical"
+
+        padding: dp(20)
+
+        Label:
+
+            text: "Goals"
+
+            font_size: "26sp"
+
+
+        Label:
+
+            text: "Goal tracker coming next."
+
+
+<BillsScreen>:
+
+    BoxLayout:
+
+        orientation: "vertical"
+
+        padding: dp(20)
+
+        Label:
+
+            text: "Bills"
+
+            font_size: "26sp"
+
+
+        Label:
+
+            text: "Bill scheduler coming next."
+
+
+<MainScreenManager>:
+
+    AccountsScreen:
+        name: "accounts"
+
+    LedgerScreen:
+        name: "ledger"
+
+    GoalsScreen:
+        name: "goals"
+
+    BillsScreen:
+        name: "bills"
+
+    current: "ledger"
